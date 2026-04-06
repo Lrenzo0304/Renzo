@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wedding Invitation</title>
+ <style>
+  body {
+    font-family: 'Georgia', serif;
+    background: 
+      url('image1.jpeg') no-repeat left top,
+      url('image3.jpeg') no-repeat right top,
+      url('image4.jpeg') no-repeat left bottom,
+      url('image5.jpeg') no-repeat right bottom,
+      url('image6.jpeg') no-repeat center top,
+      url('image7.jpeg') no-repeat center bottom,
+      url('image8.jpeg') no-repeat center right,
+      url('image9.jpeg') no-repeat center left,
+      url('image2.jpeg.jpeg') no-repeat center center;
+    background-size: 
+      30% 30%,  /* image1 */
+      30% 30%,  /* image3 */
+      30% 30%,  /* image4 */
+      30% 30%,  /* image5 */
+      30% 30%,  /* image6 */
+      30% 30%,  /* image7 */
+      30% 30%,  /* image8 */
+      30% 30%,  /* image9 */
+      40% 40%;  /* image2 (center) */
+    margin: 0;
+    padding: 30px;
+  }
+    .invitation {
+      background: rgba(0,0,0,0.7);
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 700px;
+      margin: auto;
+      position: relative;
+    }
+    .invitation::before {
+      top: -30px;
+      left: 20px;
+    }
+    .invitation::after {
+      bottom: -30px;
+      right: 20px;
+    }
+    h1, h2 {
+      margin: 10px 0;
+      color: #FFD700; /* Gold text */
+    }
+    .details {
+      margin: 20px 0;
+      font-size: 1.1em;
+      color: #fff;
+    }
+    .note {
+      margin-top: 20px;
+      font-style: italic;
+      color: #FFD700;
+    }
+    .rsvp {
+      margin-top: 30px;
+      text-align: left;
+      background: #fff;
+      color: #000;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    .rsvp h3 {
+      text-align: center;
+      color: #006400;
+    }
+    .guest {
+      margin-bottom: 10px;
+    }
+    label {
+      display: inline-block;
+      width: 80px;
+    }
+    input {
+      margin: 5px;
+      padding: 5px;
+    }
+    button {
+      background: #006400;
+      color: #FFD700;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #004d00;
+    }
+  </style>
+</head>
+<body>
+  <div class="invitation">
+    <h1>Tebogo Thipe</h1>
+    <h2>Becoming Mrs. Motseki</h2>
+    <p style="color:white;">With joy and gratitude, we invite you to witness the union of</p>
+    <h2>Tebogo Thipe & Lorenzo Motseki</h2>
+    <p class="details">
+      A love story built over <strong>2 years of friendship</strong> and <strong>8 years of dating</strong>, now blossoming into marriage.<br><br>
+      📅 <strong>7th November 2026</strong><br>
+      📍 <strong>Showgrounds Banquet Hall</strong><br>
+      🕒 <strong>From 11:00 AM</strong>
+    </p>
+    <p class="note">
+      ✨ Kindly Note:<br>
+      • No alcohol will be served<br>
+      • No traditional wear<br>
+      • No children under 12 years<br>
+      • Attendance limited: you + 2 guests (max 3 people)<br>
+      • <strong>Dress Theme: Emerald Green & Gold (mandatory)</strong>
+    </p>
+    <p style="color:white;"><em>Dress in elegance, celebrate in love, and join us for an extraordinary day unlike any other.</em></p>
+    
+    <div class="rsvp">
+      <h3>RSVP – Guest Details</h3>
+      <form id="rsvpForm">
+        <div class="guest">
+          <label>Name:</label><input type="text" name="name1">
+          <label>Surname:</label><input type="text" name="surname1">
+          <label>Age:</label><input type="number" name="age1">
+        </div>
+        <div class="guest">
+          <label>Name:</label><input type="text" name="name2">
+          <label>Surname:</label><input type="text" name="surname2">
+          <label>Age:</label><input type="number" name="age2">
+        </div>
+        <div class="guest">
+          <label>Name:</label><input type="text" name="name3">
+          <label>Surname:</label><input type="text" name="surname3">
+          <label>Age:</label><input type="number" name="age3">
+        </div>
+        <button type="button" onclick="saveRSVP()">Save RSVP</button>
+      </form>
+      <p id="confirmation" style="text-align:center; margin-top:10px; font-weight:bold; color:#006400;"></p>
+    </div>
+  </div>
+
+  <script>
+    function saveRSVP() {
+      const form = document.getElementById('rsvpForm');
+      const data = new FormData(form);
+      let guests = [];
+      for (let i = 1; i <= 3; i++) {
+        let name = data.get('name' + i);
+        let surname = data.get('surname' + i);
+        let age = data.get('age' + i);
+        if (name || surname || age) {
+          guests.push({name, surname, age});
+        }
+      }
+      localStorage.setItem('weddingRSVP', JSON.stringify(guests));
+      document.getElementById('confirmation').innerText = "Your RSVP has been saved!";
+    }
+  </script>
+</body>
+</html>
